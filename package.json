@@ -1,0 +1,11 @@
+{
+  "name": "launchpad-scroll",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "launchpad-mini": "^2.1.2"
+  }
+}
