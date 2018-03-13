@@ -1,4 +1,4 @@
-const char = require('./bigCharacters');
+const char = require('./characters');
 
 module.exports = {
     displayText: function(pad, text, color, speed, loop) {
@@ -54,7 +54,6 @@ function switchBuffer(conf) {
 
 function getMatrixInterval(matrix, index) {
     lenghtLeft = matrix[0].substr(index).length;
-    console.log(index, matrix[0].length);
     if (lenghtLeft < 8) {
         matrix[0] += matrix[0].substr(0, (8 - lenghtLeft));
         matrix[1] += matrix[1].substr(0, (8 - lenghtLeft));
