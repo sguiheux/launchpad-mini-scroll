@@ -1,6 +1,6 @@
 {
   "name": "launchpad-mini-scroll",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./launchpad-mini-scroll.js",
   "scripts": {
   },
