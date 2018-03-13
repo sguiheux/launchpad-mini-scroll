@@ -1,45 +1,39 @@
-const Launchpad = require('launchpad-mini'),
-    pad = new Launchpad();
-const char = require('./characters8x8');
+const char = require('./bigCharacters');
 
-pad.connect().then(() => {
-    pad.reset(0);
+module.exports = {
+    displayText: function(pad, text, color, speed, loop) {
+        matrix = buildTextMatrix(text);
+        index = 0;
+        currentLoop = 0;
 
-    display(pad, 'aaa', pad.green.full, 100, 2);
-});
+        bufferConf = {
+            write: 0,
+            read: 1,
+        };
 
-function display(pad, text, color, speed, loop) {
-    matrix = buildTextMatrix(text);
-    index = 0;
-    currentLoop = 0;
+        loopInterval = setInterval(() => {
+            // finish
+            if (currentLoop > loop) {
+                clearInterval(loopInterval);
+            }
 
-    bufferConf = {
-      write: 0,
-      read: 1,
-    };
+            // calculate new matrix to display
+            let idx = index%matrix[0].length;
+            if (idx === 0) {
+                currentLoop++;
+            }
+            currentMatrix = getMatrixInterval(matrix.slice(), idx);
 
-    loopInterval = setInterval(() => {
-        // finish
-        if (currentLoop > loop) {
-            clearInterval(loopInterval);
-        }
+            // reset write buffer
+            pad.reset(0);
+            pad.col(color, pad.fromPattern(currentMatrix));
 
-        // calculate new matrix to display
-        let idx = index%matrix[0].length;
-        if (idx === 0) {
-            currentLoop++;
-        }
-        currentMatrix = getMatrixInterval(matrix.slice(), idx);
-
-        // reset write buffer
-        pad.reset(0);
-        pad.col(color, pad.fromPattern(currentMatrix));
-
-        // buffer switch
-        switchBuffer(bufferConf);
-        index++;
-    }, speed);
-}
+            // buffer switch
+            switchBuffer(bufferConf);
+            index++;
+        }, speed);
+    }
+};
 
 function buildTextMatrix(text) {
     matrix = ['', '', '', '', '', '', '', ''];
