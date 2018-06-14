@@ -84,8 +84,8 @@ const alphabet = {
         'x x ',
     ],
     n: [
-        '   ',
-        'xxx',
+        '    ',
+        'xxx ',
         'x x ',
         'x x ',
     ],
@@ -108,7 +108,7 @@ const alphabet = {
         '  x ',
     ],
     r: [
-        'xx',
+        'xx  ',
         'x x ',
         'xx  ',
         'x x ',
